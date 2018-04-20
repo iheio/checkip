@@ -48,7 +48,7 @@ func(self *CheckController) CheckIp() {
 		panic(err)
 	}
 
-	c, err := p.Dial("tcp", "www.baidu.com:80")
+	c, err := p.Dial("tcp", "111.231.51.249:80")
 
 	if err != nil {
 		self.WrongReturn(err.Error(),MSG_ERR)
