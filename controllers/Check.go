@@ -5,6 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 	"fmt"
+	"time"
 )
 
 type CheckController struct {
@@ -39,7 +40,9 @@ func(self *CheckController) CheckIp() {
 	
 	}
 
+	fmt.Println(address)
 
+	//p,err := proxyclient.NewProxyClient("socks5://171.115.237.128:57839")
 	p,err := proxyclient.NewProxyClient(address)
 	if err != nil {
 		panic(err)
@@ -53,6 +56,8 @@ func(self *CheckController) CheckIp() {
 
 
 	io.WriteString(c, "GET / HTTP/1.0\r\nHOST:baidu.com\r\n\r\n")
+	//计算响应时长
+	t1 := time.Now() // get current time
 	b, err := ioutil.ReadAll(c)
 
 	if err != nil {
@@ -61,7 +66,15 @@ func(self *CheckController) CheckIp() {
 
 	fmt.Println(string(b))
 
-	self.OkReturn("success",MSG_OK)
+	elapsed := time.Since(t1)
+
+	data := make(map[string]interface{})
+
+	fmt.Println("App elapsed: ", elapsed)
+	data["spend"] = elapsed.String()
+
+
+	self.OkReturn("success",MSG_OK,data)
 
 }
 

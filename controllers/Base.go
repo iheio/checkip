@@ -17,11 +17,12 @@ type BaseController struct {
 /**
 正确返回json
  */
-func ( self *BaseController ) OkReturn(msg interface{},code int) {
+func ( self *BaseController ) OkReturn(msg interface{},code int,data interface{}) {
 	out := make(map[string]interface{})
 
 	out["msg"] = msg
 	out["code"] = code
+	out["data"] = data
 
 	self.Data["json"] = out
 	self.ServeJSON()
