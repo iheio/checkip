@@ -6,7 +6,6 @@ import (
 )
 
 func init() {
-    //beego.Router("/", &controllers.MainController{})
     ns := beego.NewNamespace("v1",
     	beego.NSRouter("check_ip", &controllers.CheckController{},"get:CheckIp"),
 	)
