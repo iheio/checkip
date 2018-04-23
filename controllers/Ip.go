@@ -29,6 +29,7 @@ func (this IpController) Get() {
 	for _, v := range values {
 		ip2port := string(v.([]byte))
 		res := strings.Contains(ip2port,":")
+		fmt.Println(res)
 		if res != true {
 			continue
 		}
