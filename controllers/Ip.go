@@ -43,7 +43,7 @@ func (this IpController) Get() {
 		//首先，实现并执行一个匿名的超时等待函数
 		timeout := make(chan bool, 1)
 		go func() {
-			time.Sleep(time.Duration(100)*time.Second)	//等待1秒钟
+			time.Sleep(time.Duration(20)*time.Second)	//等待1秒钟
 			timeout <- true
 		}()
 
