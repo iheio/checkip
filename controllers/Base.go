@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"fmt"
 	"github.com/pkg/errors"
+	"strings"
 )
 
 const(
@@ -95,6 +96,11 @@ func(self *BaseController) checkProxy(ip2port string,proxyType string)(map[strin
 	}
 
 	fmt.Println(string(b))
+
+	res := strings.Contains(string(b),"无效用户")
+	if res == true {
+		return nil,errors.New("【代理连接失败】:此服务器需要用户认证")
+	}
 
 	elapsed := time.Since(t1)
 
