@@ -77,7 +77,7 @@ func(self *BaseController) checkProxy(ip2port string,proxyType string)(map[strin
 		panic(err)
 	}
 
-	c, err := p.Dial("tcp", "111.231.51.249:80")
+	c, err := p.Dial("tcp", "www.baidu.com:80")
 
 	if err != nil {
 		fmt.Println(err.Error())
