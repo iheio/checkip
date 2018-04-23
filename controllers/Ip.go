@@ -118,6 +118,7 @@ func(this *IpController) checkProxy1(ip2port string,proxyType string,chs chan bo
 
 	}
 
+	fmt.Println(address)
 	p,err := proxyclient.NewProxyClient(address)
 	if err != nil {
 		panic(err)
