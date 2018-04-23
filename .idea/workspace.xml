@@ -51,10 +51,10 @@
       <file leaf-file-name="Ip.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/Ip.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="31" column="24" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+            <state relative-caret-position="208">
+              <caret line="67" column="81" lean-forward="false" selection-start-line="67" selection-start-column="81" selection-end-line="67" selection-end-column="81" />
               <folding>
-                <element signature="e#21#85#0" expanded="true" />
+                <element signature="e#21#145#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,10 +113,11 @@
       <file leaf-file-name="Base.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/Base.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="715">
-              <caret line="109" column="5" lean-forward="false" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
+            <state relative-caret-position="517">
+              <caret line="113" column="1" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="113" selection-end-column="1" />
               <folding>
                 <element signature="e#21#162#0" expanded="true" />
+                <element signature="n#!!block;n#checkProxy#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -376,6 +377,7 @@
           <caret line="24" column="22" lean-forward="false" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
           <folding>
             <element signature="e#21#162#0" expanded="true" />
+            <element signature="n#!!block;n#checkProxy#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -423,6 +425,7 @@
           <caret line="4" column="5" lean-forward="false" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
           <folding>
             <element signature="e#21#162#0" expanded="true" />
+            <element signature="n#!!block;n#checkProxy#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -605,16 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/Base.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="715">
-          <caret line="109" column="5" lean-forward="false" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
-          <folding>
-            <element signature="e#21#162#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../github.com/garyburd/redigo/redis/redis.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -631,12 +624,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/Base.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="113" column="1" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="113" selection-end-column="1" />
+          <folding>
+            <element signature="e#21#162#0" expanded="true" />
+            <element signature="n#!!block;n#checkProxy#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/Ip.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="31" column="24" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+        <state relative-caret-position="208">
+          <caret line="67" column="81" lean-forward="false" selection-start-line="67" selection-start-column="81" selection-end-line="67" selection-end-column="81" />
           <folding>
-            <element signature="e#21#85#0" expanded="true" />
+            <element signature="e#21#145#0" expanded="true" />
           </folding>
         </state>
       </provider>
