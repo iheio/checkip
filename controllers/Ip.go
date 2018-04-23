@@ -41,7 +41,23 @@ func (this IpController) Get() {
 		chs[k] = make(chan bool)
 
 
-	   go this.checkProxy(ip2port,"http",chs[k])
+		//首先，实现并执行一个匿名的超时等待函数
+		timeout := make(chan bool, 1)
+		go func() {
+			time.Sleep(time.Duration(40)*time.Second)	//等待1秒钟
+			timeout <- true
+		}()
+
+
+
+	    go this.checkProxy1(ip2port,"http",chs[k])
+
+		//然后，我们把timeout这个channel利用起来
+		select {
+			case <- timeout:
+				chs[k] <- false
+		}
+
 
 		if <-chs[k] == false {//删除不可用ip
 			c.Do("HDEL", "useful_proxy",ip2port)
@@ -65,7 +81,7 @@ func (this IpController) Get() {
 
 }
 
-func(self *IpController) checkProxy(ip2port string,proxyType string,chs chan bool) {
+func(this *IpController) checkProxy1(ip2port string,proxyType string,chs chan bool) {
 
 	var address string
 	switch proxyType {
@@ -125,4 +141,3 @@ func(self *IpController) checkProxy(ip2port string,proxyType string,chs chan boo
 	chs <- true
 
 }
-
