@@ -35,7 +35,8 @@ func (this IpController) Get() {
 
 		_,err := this.checkProxy(ip2port,"http")
 
-		if err != nil {
+		if err != nil {//删除不可用ip
+			c.Do("HDEL", "useful_proxy",ip2port)
 			continue
 		}
 
