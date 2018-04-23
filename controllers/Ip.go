@@ -39,18 +39,13 @@ func (this IpController) Get() {
 			continue
 		}
 		chs[k] = make(chan bool)
-		defer close(chs[k])
-
 
 		//首先，实现并执行一个匿名的超时等待函数
 		timeout := make(chan bool, 1)
-		defer close(timeout)
 		go func() {
-			//time.Sleep(time.Duration(3)*time.Second)	//等待1秒钟
-			time.Sleep(time.Duration(2)*time.Second)
+			time.Sleep(time.Duration(20)*time.Second)	//等待1秒钟
 			timeout <- true
 		}()
-
 
 
 	    go this.checkProxy1(ip2port,"http",chs[k])
@@ -61,22 +56,38 @@ func (this IpController) Get() {
 				c.Do("HDEL", "useful_proxy",ip2port)
 				continue
 			case <-chs[k]:
-				ips = append(ips,ip2port)
-				if len(ips) == num {//达到了获取数量直接返回
-					break
-
-				} else {
+				if <-chs[k] == false {//删除不可用ip
+					c.Do("HDEL", "useful_proxy",ip2port)
 					continue
 				}
 
+				ips = append(ips,ip2port)
+
+
+				if len(ips) == num {//达到了获取数量直接返回
+					break
+
+				}
 			
 		}
 
 
+		continue
 
-		c.Do("HDEL", "useful_proxy",ip2port)
 
 
+		if <-chs[k] == false {//删除不可用ip
+			c.Do("HDEL", "useful_proxy",ip2port)
+			continue
+		}
+
+		ips = append(ips,ip2port)
+
+
+		if len(ips) == num {//达到了获取数量直接返回
+			break
+
+		}
 
 
 
