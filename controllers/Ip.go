@@ -41,11 +41,11 @@ func (this IpController) Get() {
 		chs[k] = make(chan bool)
 
 
-	    go this.checkProxy1(ip2port,"http",chs[k])
+	    _,err := this.checkProxy(ip2port,"http")
 
 
 
-		if <-chs[k] == false {//删除不可用ip
+		if err != nil {//删除不可用ip
 			c.Do("HDEL", "useful_proxy",ip2port)
 			continue
 		}
