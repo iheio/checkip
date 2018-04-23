@@ -48,7 +48,7 @@ func (this IpController) Get() {
 		}()
 
 
-	    go this.checkProxy1(ip2port,"http",chs[k])
+	    this.checkProxy1(ip2port,"http",chs[k])
 
 		//然后，我们把timeout这个channel利用起来
 		select {
