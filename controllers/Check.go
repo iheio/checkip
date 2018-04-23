@@ -1,11 +1,7 @@
 package controllers
 
 import (
-	"github.com/gamexg/proxyclient"
-	"io"
-	"io/ioutil"
 	"fmt"
-	"time"
 )
 
 type CheckController struct {
@@ -21,60 +17,20 @@ func(self *CheckController) CheckIp() {
 		self.WrongReturn("参数错误",MSG_ERR)
 	}
 
-
-	var address string
-	switch proxyType {
-		case "http":
-			address = "http://"+ip+":"+port
-			break
-		case "https":
-			address = "https://"+ip+":"+port
-			break
-		case "socks5":
-			address = "socks5://"+ip+":"+port
-			break
-		default:
-			address = "http://"+ip+":"+port
-			break
-
-	
-	}
-
-	fmt.Println(address)
-
-	//p,err := proxyclient.NewProxyClient("socks5://171.115.237.128:57839")
-	p,err := proxyclient.NewProxyClient(address)
+	ip = ip+":"+port
+	data,err := self.checkProxy(ip,proxyType)
 	if err != nil {
-		panic(err)
-	}
-
-	c, err := p.Dial("tcp", "111.231.51.249:80")
-
-	if err != nil {
+		fmt.Println(err)
 		self.WrongReturn(err.Error(),MSG_ERR)
 	}
 
 
-	io.WriteString(c, "GET / HTTP/1.0\r\nHOST:baidu.com\r\n\r\n")
-	//计算响应时长
-	t1 := time.Now() // get current time
-	b, err := ioutil.ReadAll(c)
-
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println(string(b))
-
-	elapsed := time.Since(t1)
-
-	data := make(map[string]interface{})
-
-	fmt.Println("App elapsed: ", elapsed)
-	data["spend"] = elapsed.String()
+	//p,err := proxyclient.NewProxyClient("socks5://171.115.237.128:57839")
 
 
-	self.OkReturn("success",MSG_OK,data)
+	speed :=data["spend"].(string)
+
+	self.OkReturn("【代理连接成功】：连接时长为："+speed,MSG_OK,data)
 
 }
 
