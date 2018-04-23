@@ -47,6 +47,7 @@ func (this IpController) Get() {
 		defer close(timeout)
 		go func() {
 			//time.Sleep(time.Duration(3)*time.Second)	//等待1秒钟
+			time.Sleep(time.Duration(2)*time.Second)
 			timeout <- true
 		}()
 
