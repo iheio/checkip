@@ -39,6 +39,7 @@ func (this IpController) Get() {
 			continue
 		}
 		chs[k] = make(chan bool)
+		defer close(chs[k])
 
 
 		//首先，实现并执行一个匿名的超时等待函数
@@ -56,21 +57,23 @@ func (this IpController) Get() {
 		select {
 			case <- timeout:
 				chs[k] <- false
+			case <-chs[k]:
+				ips = append(ips,ip2port)
+				if len(ips) == num {//达到了获取数量直接返回
+					break
+
+				} else {
+					continue
+				}
+
+			
 		}
 
 
-		if <-chs[k] == false {//删除不可用ip
-			c.Do("HDEL", "useful_proxy",ip2port)
-			continue
-		}
 
-		ips = append(ips,ip2port)
+		c.Do("HDEL", "useful_proxy",ip2port)
 
 
-		if len(ips) == num {//达到了获取数量直接返回
-			break
-
-		}
 
 
 
