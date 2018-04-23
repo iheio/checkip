@@ -46,7 +46,7 @@ func (this IpController) Get() {
 		timeout := make(chan bool, 1)
 		defer close(timeout)
 		go func() {
-			time.Sleep(time.Duration(3)*time.Second)	//等待1秒钟
+			//time.Sleep(time.Duration(3)*time.Second)	//等待1秒钟
 			timeout <- true
 		}()
 
@@ -57,7 +57,8 @@ func (this IpController) Get() {
 		//然后，我们把timeout这个channel利用起来
 		select {
 			case <- timeout:
-				chs[k] <- false
+				c.Do("HDEL", "useful_proxy",ip2port)
+				continue
 			case <-chs[k]:
 				ips = append(ips,ip2port)
 				if len(ips) == num {//达到了获取数量直接返回
