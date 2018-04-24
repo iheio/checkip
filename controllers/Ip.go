@@ -67,6 +67,40 @@ func (this IpController) Get() {
 
 }
 
+func (this *IpController) All() {
+	c, err := redis.Dial("tcp", "127.0.0.1:6379")
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	defer c.Close()
+
+	values, _ := redis.Values(c.Do("HGETALL", "useful_proxy"))
+
+
+	var ips []string
+
+	for _, v := range values {
+		ip2port := string(v.([]byte))
+		res := strings.Contains(ip2port,":")
+		fmt.Println(res)
+		if res != true {
+			continue
+		}
+
+		ips = append(ips,ip2port)
+	}
+
+
+	this.OkReturn("success",MSG_OK,ips)
+
+
+}
+
+
+
 func(this *IpController) checkProxy1(ip2port string,proxyType string,chs chan bool) {
 
 	var address string
@@ -128,3 +162,5 @@ func(this *IpController) checkProxy1(ip2port string,proxyType string,chs chan bo
 	chs <- true
 
 }
+
+
