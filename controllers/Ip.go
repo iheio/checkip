@@ -80,17 +80,21 @@ func (this *IpController) All() {
 	values, _ := redis.Values(c.Do("HGETALL", "useful_proxy"))
 
 
-	var ips []string
+	var ips []map[string]string
 
 	for _, v := range values {
 		ip2port := string(v.([]byte))
 		res := strings.Contains(ip2port,":")
-		fmt.Println(res)
+
 		if res != true {
 			continue
 		}
 
-		ips = append(ips,ip2port)
+		var t  map[string]string
+		t["ip"] = ip2port
+
+		ips = append(ips,t)
+
 	}
 
 
