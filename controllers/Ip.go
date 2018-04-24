@@ -91,6 +91,7 @@ func (this *IpController) All() {
 		}
 
 		var t  map[string]string
+		t = make(map[string]string)
 		t["ip"] = ip2port
 
 		ips = append(ips,t)
